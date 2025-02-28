@@ -9,8 +9,8 @@ def clean_data(input_file, target_column,numb, missing_threshold=50):
     print(f"Original number of columns: {data.shape[1]}")
 
     # Ensure the target column is present
-    if target_column not in data.columns:
-        raise ValueError(f"The target column '{target_column}' is not present in the dataset.")
+  #  if target_column not in data.columns:
+    #    raise ValueError(f"The target column '{target_column}' is not present in the dataset.")
 
     # Identify columns with missing values above the threshold
     columns_to_drop = data.columns[data.isna().sum() >= missing_threshold]
@@ -20,8 +20,9 @@ def clean_data(input_file, target_column,numb, missing_threshold=50):
 
     # Select only numeric columns + ensure the target column is retained
     numeric_columns = data_clean.select_dtypes(include=["number"]).columns
-    if target_column not in numeric_columns:
-        numeric_columns = numeric_columns.append(pd.Index([target_column]))  # Ensure target column stays
+    if numb ==0: 
+        if target_column not in numeric_columns:
+            numeric_columns = numeric_columns.append(pd.Index([target_column]))  # Ensure target column stays
 
     data_clean = data_clean[numeric_columns]  # Keep only numeric columns
 
@@ -44,4 +45,4 @@ input_filetwo = "test.csv"  # Replace with your actual file
 
 target_column = "SalePrice"  # Replace with your actual target column
 clean_data(input_file, target_column,0)
-clean_data(input_file, target_column,1)
+clean_data(input_filetwo, target_column,1)
