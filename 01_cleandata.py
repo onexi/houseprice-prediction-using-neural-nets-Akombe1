@@ -1,6 +1,6 @@
 import pandas as pd
 
-def clean_data(input_file, target_column, missing_threshold=50):
+def clean_data(input_file, target_column,numb, missing_threshold=50):
     # Load the data from the CSV file
     data = pd.read_csv(input_file)
 
@@ -30,11 +30,18 @@ def clean_data(input_file, target_column, missing_threshold=50):
     print(f"Number of columns after cleaning: {data_clean.shape[1]}")
 
     # Save the cleaned data to a new CSV file
-    output_file = "clean.csv"
+    if numb == 0:
+        output_file = "clean.csv"
+    if numb == 1:
+        output_file = "cleantest.csv"
+    
     data_clean.to_csv(output_file, index=False)
     print(f"Cleaned data saved to {output_file}")
 
 # Example usage
 input_file = "train.csv"  # Replace with your actual file
+input_filetwo = "test.csv"  # Replace with your actual file
+
 target_column = "SalePrice"  # Replace with your actual target column
-clean_data(input_file, target_column)
+clean_data(input_file, target_column,0)
+clean_data(input_file, target_column,1)
